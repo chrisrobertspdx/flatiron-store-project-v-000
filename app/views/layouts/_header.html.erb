@@ -1,8 +1,21 @@
 <nav class="">
     <ul>
         <li> <%= link_to "Store Home", store_path %> </li>
-        <% if !!@cart %>
-          <li> <%= link_to "Cart", cart_path(current_cart) %></li>
+        
+        <% if !user_signed_in? %>
+            <li><%= link_to "Sign up", new_user_registration_path %></li>
+            <li><%= link_to "Sign in", user_session_path %></li>
+        <% else %>   
+            <li>Signed in as <%= current_user.email %></li>
+            <% if current_user.current_cart != nil && current_user.current_cart.line_items.size > 0  %>
+                <li><%= link_to "Current Cart", cart_path(current_user.current_cart) %></li>
+            <% end %>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete  %></li>
         <% end %>
+
+          
+
     </ul>
 </nav>
+
+

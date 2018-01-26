@@ -12,5 +12,14 @@
 <%= render 'layouts/header' %>
 <%= yield %>
 
+
+<hr>
+<strong>Debugging:</strong><br>
+<% if current_user %>
+Current User: <%= current_user.email %><br>
+<% if current_user.current_cart != nil %>
+Current CartID: <%= current_user.current_cart.id %>
+<% end %>
+<% end %>
 </body>
 </html>
